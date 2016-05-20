@@ -1,8 +1,10 @@
 package com.chen.time;
 
+import java.awt.Frame;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TimeDate {
@@ -17,20 +19,21 @@ public class TimeDate {
 	
 
 	public static void main(String[] args) {
-		System.out.println(getCurrentDateString(format1));
-		System.out.println(getCurrentDateString(format2));
-		System.out.println(getCurrentDateString(format3));
-		System.out.println(getCurrentDateString(format4));
-		System.out.println(getCurrentDateString(format5));
-		System.out.println(getCurrentDateString(format6));
-		System.out.println(getCurrentDateString(format7));
-		System.out.println(getCurrentDateString(format8));
-		
-		System.err.println("-----------------------------------");
-		System.err.println(getCurrentDate());
-		System.err.println(getCurrentDateString(format1));
-		System.err.println(stringToDate(getCurrentDateString(format1)));
-		System.err.println(dateToString(getCurrentDate()));
+//		System.out.println(getCurrentDateString(format1));
+//		System.out.println(getCurrentDateString(format2));
+//		System.out.println(getCurrentDateString(format3));
+//		System.out.println(getCurrentDateString(format4));
+//		System.out.println(getCurrentDateString(format5));
+//		System.out.println(getCurrentDateString(format6));
+//		System.out.println(getCurrentDateString(format7));
+//		System.out.println(getCurrentDateString(format8));
+//		
+//		System.err.println("-----------------------------------");
+//		System.err.println(getCurrentDate());
+//		System.err.println(getCurrentDateString(format1));
+//		System.err.println(stringToDate(getCurrentDateString(format1)));
+//		System.err.println(dateToString(getCurrentDate()));
+		System.err.println(getYesterdayDate());
 		
 	}
 	
@@ -80,7 +83,41 @@ public class TimeDate {
 		return format.format(date);
 	}
 	
+	/**
+	 * 获取昨天的日期
+	 * @return
+	 */
+	private static String getYesterdayDate() {
+		Calendar calendar=Calendar.getInstance();
+		calendar.add(Calendar.DATE,-1);
+		SimpleDateFormat format=new SimpleDateFormat(format2);
+		return format.format(calendar.getTime());
+	}
 	
+	/**
+	 * 获取N天后的时间
+	 * @param formate 时间格式
+	 * @param delay   多少天后
+	 * @return
+	 */
+	private static String getDelayDayDate(String formate,int delay) {
+		Calendar calendar=Calendar.getInstance();
+		calendar.add(Calendar.DATE, delay);
+		SimpleDateFormat simpleDateFormat=new SimpleDateFormat(formate);
+		return simpleDateFormat.format(calendar.getTime());
+	}
 	
-	
+	/**
+	 * 获取N个小时后的时间
+	 * @param format 时间格式
+	 * @param delay  N个小时之后
+	 * @return
+	 */
+	private static String getDelayHourDate(String format,int delay) {
+		Calendar calendar=Calendar.getInstance();
+		calendar.add(Calendar.HOUR, delay);
+		SimpleDateFormat simpleDateFormat=new SimpleDateFormat(format);
+		return simpleDateFormat.format(calendar.getTime());
+		
+	}
 }
